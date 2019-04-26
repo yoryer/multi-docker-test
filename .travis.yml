@@ -20,3 +20,16 @@ after_success:
   - docker push yoryer/multi-nginx
   - docker push yoryer/multi-server
   - docker push yoryer/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "sa-east-1"
+  app: "multi-docker-test"
+  env: "MultiDockerTest-env"
+  bucket_name: "elasticbeanstalk-sa-east-1-830618992450"
+  bucket_path: "multi-docker-test"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
